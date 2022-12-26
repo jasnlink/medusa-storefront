@@ -29,5 +29,7 @@ jobs:
           mkdir ~/.ssh
           echo "$remote_key" > ~/.ssh/id_medusa_server_deploy_key
           chmod 600 ~/.ssh/id_medusa_server_deploy_key
+          ssh -i ~/.ssh/id_medusa_server_deploy_key ${remote_user}@${remote_host} -t "pm2 stop medusa-storefront"
           rsync -azvr --delete -e "ssh -p ${remote_port} -i ~/.ssh/id_medusa_server_deploy_key -o StrictHostKeyChecking=no" ${local_dir} ${remote_user}@${remote_host}:${remote_dir}
+          ssh -i ~/.ssh/id_medusa_server_deploy_key ${remote_user}@${remote_host} -t "cd ${remote_dir} && pm2 start 'npm run start' --name medusa-storefront"
           rm ~/.ssh/id_medusa_server_deploy_key
