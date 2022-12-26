@@ -23,11 +23,11 @@ jobs:
           remote_dir: "/var/medusa-storefront"
         run: |
           npm install
+          echo "$dev_env_file" > .env
+          chmod 600 .env
           npm run build
           mkdir ~/.ssh
           echo "$remote_key" > ~/.ssh/id_medusa_server_deploy_key
           chmod 600 ~/.ssh/id_medusa_server_deploy_key
-          echo "$dev_env_file" > .env
-          chmod 600 .env
           rsync -azvr --delete -e "ssh -p ${remote_port} -i ~/.ssh/id_medusa_server_deploy_key -o StrictHostKeyChecking=no" ${local_dir} ${remote_user}@${remote_host}:${remote_dir}
           rm ~/.ssh/id_medusa_server_deploy_key
