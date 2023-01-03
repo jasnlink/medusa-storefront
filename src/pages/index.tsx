@@ -16,7 +16,7 @@ const Home: NextPageWithLayout = () => {
     <>
       <Head
         title="Home"
-        description="Shop all available models only at the ACME. Worldwide Shipping. Secure Payment."
+        description="Shop all available models only at the KBDSHOP. Duty-free Canadian Shipping. Secure Payment."
       />
       {/* <Hero />
       <FeaturedProducts /> */}
